@@ -23,7 +23,6 @@ const Navbar = async () => {
             {ENV.isDev || ENV.isPreview ? (
               <NavItem key="/preview" slug="/preview" title="多写一笔" />
             ) : null}
-            <NavItem key="/guestbook" slug="/guestbook" title="与你一句" />
           </ul>
           <div className="flex gap-2 sm:gap-4">
             <RssExternalLink key="rss" />

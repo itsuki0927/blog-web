@@ -30,7 +30,7 @@ const sitemap = async () => {
       tag.updatedAt || tag.createdAt || new Date().toISOString().split('T')[0],
   }));
 
-  const routes = ['', '/blog', '/guestbook'].map((route) => ({
+  const routes = ['', '/blog'].map((route) => ({
     url: `${BASE_URL}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }));

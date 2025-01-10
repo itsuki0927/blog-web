@@ -1,6 +1,5 @@
 import type { BlogPosting, WithContext } from 'schema-dts';
 import MdxContent from '@/components/common/MdxContent';
-import splitPage from '@/utils/splitPage';
 import { Suspense } from 'react';
 import { Blog } from '@/types/blog';
 import BlogTableOfContent from '../BlogTableOfContent';

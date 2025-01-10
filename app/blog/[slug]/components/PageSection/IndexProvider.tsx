@@ -14,7 +14,13 @@ const IndexContext = createContext<{
   next: () => void;
   prev: () => void;
   set: (index: number) => void;
-}>(null);
+}>({
+  index: 0,
+  numSections: 0,
+  next: () => {},
+  prev: () => {},
+  set: () => {},
+});
 
 interface IndexProviderProps {
   numSections?: number;

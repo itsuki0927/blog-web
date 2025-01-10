@@ -4,7 +4,7 @@ import { kvKeys } from './constants/kv';
 import { redis } from './libs/upstash';
 import { checkIPIsBlocked } from './actions/ip';
 import { ENV } from './constants/env';
-import { updateSession } from './libs/supabase/middleware';
+// import { updateSession } from './libs/supabase/middleware';
 
 const publicRoutes = [
   '/',
@@ -37,7 +37,7 @@ const middleware = async (req: NextRequest) => {
     if (isApi) {
       return NextResponse.json(
         { error: 'You have been blocked.' },
-        { status: 403 },
+        { status: 403 }
       );
     }
 

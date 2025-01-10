@@ -3,7 +3,6 @@
 import classNames from 'clsx';
 import { ReactNode, useEffect, useRef } from 'react';
 import { useIndexContext } from './IndexProvider';
-import PageSectionComments from './PageSectionComments';
 
 const isVisible = (element: HTMLElement) => {
   const { top } = element.getBoundingClientRect();
@@ -52,7 +51,6 @@ function PageSection({ index, children, blogId }: PageSectionProps) {
 
       {children}
 
-      <PageSectionComments blogId={blogId} index={index} />
     </section>
   );
 }

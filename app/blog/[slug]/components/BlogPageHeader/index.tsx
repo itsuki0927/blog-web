@@ -1,4 +1,3 @@
-import { getBlogViews } from '@/actions/blog';
 import { Blog } from '@/types/blog';
 import BlogPageHeaderUI from './ui';
 
@@ -8,13 +7,13 @@ interface BlogPageHeaderProps {
 }
 
 const BlogPageHeader = async ({ slug, blog }: BlogPageHeaderProps) => {
-  const blogViews = await getBlogViews(slug);
+  // const blogViews = await getBlogViews(slug);
 
   return (
     <BlogPageHeaderUI
-      blogViews={blogViews}
-      createdAt={blog.createdAt}
-      publishedAt={blog.updatedAt}
+      blogViews={blog.views}
+      createdAt={new Date(blog.createdAt ?? '')}
+      publishedAt={new Date(blog.updatedAt ?? '')}
     />
   );
 };

@@ -3,7 +3,6 @@ import { kvKeys } from '@/constants/kv';
 import { unstable_cache as cache } from 'next/cache';
 import { ENV } from '@/constants/env';
 import { getAllBlogs } from './blog';
-import { getAllComments } from './comment';
 
 export interface SummaryResponse {
   commentCount: number;
@@ -14,16 +13,10 @@ export interface SummaryResponse {
 
 const getCommentCount = cache(
   async () => {
-    try {
-      const data = await getAllComments();
-      return data.length;
-    } catch (err) {
-      console.error('getSummary --> getComment error', err);
-    }
     return 0;
   },
   ['getCommentCount'],
-  { revalidate: 3600 },
+  { revalidate: 3600 }
 );
 
 const getOnlineDays = () => {
@@ -60,5 +53,5 @@ export const getSummary = cache(
   ['getSummary'],
   {
     revalidate: 3600,
-  },
+  }
 );

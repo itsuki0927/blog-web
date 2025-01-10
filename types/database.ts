@@ -1,6 +1,5 @@
 import { Database as DatabaseGenerated } from '@/types_db';
 import { MergeDeep } from 'type-fest';
-import { CommentEmoji } from './comment';
 import { userAgent } from 'next/server';
 import { BlogTag } from './blogTag';
 import { Tag } from './tag';
@@ -39,35 +38,27 @@ export type Database = MergeDeep<
         };
         comment_dev: {
           Row: {
-            emoji: CommentEmoji;
             userAgent: UserAgent;
             geo: IPLocation | null;
             provider: string;
           };
           Insert: {
-            emoji?: CommentEmoji;
             userAgent: UserAgent;
             geo: IPLocation | null;
           };
-          Update: {
-            emoji?: CommentEmoji;
-          };
+          Update: {};
         };
         comment: {
           Row: {
-            emoji: CommentEmoji;
             userAgent: UserAgent;
             geo: IPLocation | null;
             provider: string;
           };
           Insert: {
-            emoji?: CommentEmoji;
             userAgent: UserAgent;
             geo: IPLocation | null;
           };
-          Update: {
-            emoji?: CommentEmoji;
-          };
+          Update: {};
         };
       };
     };

@@ -20,7 +20,7 @@ const fetchBlog = async (slug: string) => {
     return notFound();
   }
 
-  const headings = getHeadings(blog.content);
+  const headings = getHeadings(blog?.content ?? '');
 
   return { headings, blog };
 };
@@ -34,6 +34,10 @@ const PreviewBlogPage = async ({ params }: PreviewBlogPageProps) => {
     notFound();
   }
   const { blog } = await fetchBlog(slug);
+
+  if (!blog) {
+    notFound();
+  }
 
   return <BlogDetailEntry blog={blog} slug={slug} />;
 };

@@ -83,6 +83,9 @@ dependencies:
   '@vercel/edge-config':
     specifier: ^0.4.1
     version: 0.4.1
+  '@vercel/functions':
+    specifier: ^1.5.2
+    version: 1.5.2
   '@vercel/speed-insights':
     specifier: ^1.0.14
     version: 1.0.14(next@15.0.2)(react@18.3.1)
@@ -1756,6 +1759,16 @@ packages:
     engines: {node: '>=14.6'}
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
+    dev: false
+
+  /@vercel/functions@1.5.2:
+    resolution: {integrity: sha512-9XuynFoM/J1X+LSahgjhuAZCbZ96vm9mpXapCkSS1MX890U7zLh7n2RW/2KLNuxsXt8u8h2dOCw+Njtg+7pXgQ==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      '@aws-sdk/credential-provider-web-identity': '*'
+    peerDependenciesMeta:
+      '@aws-sdk/credential-provider-web-identity':
+        optional: true
     dev: false
 
   /@vercel/speed-insights@1.0.14(next@15.0.2)(react@18.3.1):

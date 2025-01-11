@@ -12,7 +12,8 @@
     "supabase:link": "node supabase/link.js",
     "supabase:generate-types": "npx supabase gen types typescript --local --schema public > types_db.ts",
     "supabase:generate-migration": "npx supabase db diff | npx supabase migration new update",
-    "supabase:migrate": "npx supabase migration up --linked"
+    "supabase:migrate": "npx supabase migration up --linked",
+    "type": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
@@ -41,6 +42,7 @@
     "@upstash/redis": "^1.34.3",
     "@vercel/analytics": "^1.3.2",
     "@vercel/edge-config": "^0.4.1",
+    "@vercel/functions": "^1.5.2",
     "@vercel/speed-insights": "^1.0.14",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

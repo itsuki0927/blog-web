@@ -5,6 +5,7 @@ import type { Language } from 'prism-react-renderer';
 import { Highlight, themes } from 'prism-react-renderer';
 import { calculateLinesToHighlight, hasTitle } from './utils';
 import styles from './style.module.scss';
+import { Key } from 'react';
 
 export interface CodeBlockProps {
   codeString: string;
@@ -56,7 +57,7 @@ const HighlightedCodeText = ({
                   !displayLineNumber && styles.hiddenLineNumber,
                 )}
                 data-testid={highlightLine?.(index) ? 'highlight-line' : 'line'}
-                key={key}
+                key={key as Key}
                 {...lineRestProps}
               >
                 {displayLineNumber ? (
@@ -71,7 +72,7 @@ const HighlightedCodeText = ({
                     return (
                       <span
                         data-testid="content-line"
-                        key={tokenKey}
+                        key={tokenKey as Key}
                         {...rest}
                       />
                     );

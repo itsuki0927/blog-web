@@ -31,15 +31,14 @@ const Feedback = ({}: FeedbackProps) => {
       <div className="space-y-4">
         <p>
           Was anything confusing, hard to follow, or out of date? Let me know
-          what you think of the article and I'll make sure to update it with
+          what you think of the article and I&apos;ll make sure to update it with
           your advice.
         </p>
 
         <textarea
           id="message"
-          type="text"
           name="message"
-          class="p-2 border-2 rounded-lg focus:outline-none focus:border-blue-400"
+          className="p-2 border-2 rounded-lg focus:outline-none focus:border-blue-400"
         ></textarea>
       </div>
     </HomeCard>

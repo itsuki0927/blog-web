@@ -5,6 +5,7 @@ import { PageProps } from '@/types/common';
 import getHeadings from '@/utils/getHeadings';
 import { notFound } from 'next/navigation';
 import { getDraftBlog } from '../action';
+import splitPage from '@/utils/splitPage';
 
 export type PreviewBlogPageProps = PageProps<{ slug: string }>;
 
@@ -39,7 +40,11 @@ const PreviewBlogPage = async ({ params }: PreviewBlogPageProps) => {
     notFound();
   }
 
-  return <BlogDetailEntry blog={blog} slug={slug} />;
+  const a = splitPage(blog.content,blog.id)
+
+  const { content, length: numSections } = splitPage(blog.content, blog.id);
+
+  return <BlogDetailEntry blog={{  ...blog, content }} slug={slug} numSections={numSections} />;
 };
 
 export default PreviewBlogPage;

@@ -1,30 +1,35 @@
 'use server';
 
 import { get } from '@vercel/edge-config';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 import countries from '@/constants/countries.json';
 import { ENV } from '@/constants/env';
 import { getMessageFromNormalError } from '@/utils/error';
 import { IPLocation } from '@/types/database';
+import { ipAddress } from '@vercel/functions';
 
-export const getIP = async (request?: NextRequest) => {
-  if (request && request.ip) {
-    return request.ip;
-  }
+export const getIP = async (request: NextRequest) => {
   if (ENV.isDev) {
     return '221.194.171.227'; // mock
   }
-  const FALLBACK_IP_ADDRESS = '0.0.0.0';
-  const forwardedFor = request?.headers.get('x-forwarded-for');
-  if (forwardedFor) {
-    return forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS;
+  if (request) {
+    return ipAddress(request);
   }
-  return request?.headers.get('x-real-ip') ?? FALLBACK_IP_ADDRESS;
+  return null;
+  // const FALLBACK_IP_ADDRESS = '0.0.0.0';
+  // const forwardedFor = request?.headers.get('x-forwarded-for');
+  // if (forwardedFor) {
+  //   return forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS;
+  // }
+  // return request?.headers.get('x-real-ip') ?? FALLBACK_IP_ADDRESS;
 };
 
-export const checkIPIsBlocked = async (request?: NextRequest) => {
+export const checkIPIsBlocked = async (request: NextRequest) => {
   const blockedIPs = (await get<string[]>('blockedIPs')) || [];
   const ip = await getIP(request);
+  if (!ip) {
+    return false;
+  }
   return blockedIPs.includes(ip);
 };
 
@@ -46,7 +51,7 @@ const queryLocationByIpApi = async (ip: string): Promise<IPLocation> => {
       `http://ip-api.com/json/${ip}?fields=status,message,country,countryCode,region,regionName,city,zip,query`,
       {
         cache: 'no-store',
-      },
+      }
     );
     const data = await res.json();
     return data?.status !== 'success'
@@ -101,7 +106,7 @@ const queryLocation = (ip: string) => {
 };
 
 export const getLocationByIP = async (
-  ip: string,
+  ip: string
 ): Promise<IPLocation | null> => {
   try {
     if (ENV.isDev) {
@@ -111,7 +116,7 @@ export const getLocationByIP = async (
     const data = await queryLocation(ip);
     if (data) {
       const countryInfo = countries.find(
-        (x) => x.cca2 === data?.countryCode.toUpperCase(),
+        (x) => x.cca2 === data?.countryCode.toUpperCase()
       );
       const flag = countryInfo?.flag || '';
       return { ...data, flag };

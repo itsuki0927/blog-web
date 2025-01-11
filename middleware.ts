@@ -4,6 +4,7 @@ import { kvKeys } from './constants/kv';
 import { redis } from './libs/upstash';
 import { checkIPIsBlocked } from './actions/ip';
 import { ENV } from './constants/env';
+import { geolocation } from '@vercel/functions';
 // import { updateSession } from './libs/supabase/middleware';
 
 const publicRoutes = [
@@ -28,7 +29,8 @@ export const config = {
 };
 
 const middleware = async (req: NextRequest) => {
-  const { geo, nextUrl } = req;
+  const geo = geolocation(req);
+  const { nextUrl } = req;
 
   const isApi = nextUrl.pathname.startsWith('/api/');
   const isBlocked = await checkIPIsBlocked(req);

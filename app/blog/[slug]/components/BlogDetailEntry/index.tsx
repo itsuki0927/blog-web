@@ -5,7 +5,7 @@ import { Blog } from '@/types/blog';
 import BlogTableOfContent from '../BlogTableOfContent';
 import BlogHeader from '../BlogHeader';
 import { IndexProvider } from '../PageSection/IndexProvider';
-import BlogContentSkeleton from '../BlogContentRender/skeleton';
+// import BlogContentSkeleton from '../BlogContentRender/skeleton';
 import BlogReactionsUI from '../BlogReactions/UI';
 import MobileNavIsland from '../MobileNavIsland';
 import { META } from '@/constants/seo';
@@ -46,7 +46,7 @@ const BlogDetailEntry = ({ blog, slug, numSections }: BlogDetailEntryProps) => {
         <BlogHeader blog={blog} />
 
         <IndexProvider numSections={numSections}>
-          <Suspense fallback={<BlogContentSkeleton />}>
+          <Suspense fallback={<div>Loading...</div>}>
             <MdxContent options={{ scope: blog }} source={blog.content} />
           </Suspense>
         </IndexProvider>
